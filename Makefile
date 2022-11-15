@@ -1,3 +1,4 @@
+VERSIONS=a b c d
 CFLAGS= -g -Wall -Werror -Wextra -pedantic -std=c11
 
 % : %.c
@@ -6,8 +7,11 @@ CFLAGS= -g -Wall -Werror -Wextra -pedantic -std=c11
 	@rm $@
 
 all:
-	@for i in *.c; do \
-		echo "$$i:"; \
-		make -s $${i%.*}; \
-		echo ""; \
+	@for v in $(VERSIONS); do \
+		for i in $$(seq 1 10); do \
+			echo "$$v$$i.c:"; \
+			make -s $$v$$i; \
+			echo ""; \
+		done; \
 	done
+
